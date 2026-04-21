@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E830C82A-EB10-4B1F-A839-B09C845C3EC7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PryBarreraFix</RootNamespace>
+    <AssemblyName>PryBarreraFix</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsBaseDatosCliente.cs" />
+    <Compile Include="clsBaseDatosLogs.cs" />
+    <Compile Include="clsBaseDatosUsuarios.cs" />
+    <Compile Include="clsConexionDB.cs" />
+    <Compile Include="frmAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAyuda.Designer.cs">
+      <DependentUpon>frmAyuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarProveedor.Designer.cs">
+      <DependentUpon>frmBuscarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCargaPrograma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargaPrograma.Designer.cs">
+      <DependentUpon>frmCargaPrograma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCargarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargarProveedor.Designer.cs">
+      <DependentUpon>frmCargarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientes.Designer.cs">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInicio.Designer.cs">
+      <DependentUpon>frmInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInicioSesion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInicioSesion.Designer.cs">
+      <DependentUpon>frmInicioSesion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAyuda.resx">
+      <DependentUpon>frmAyuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarProveedor.resx">
+      <DependentUpon>frmBuscarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCargaPrograma.resx">
+      <DependentUpon>frmCargaPrograma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCargarProveedor.resx">
+      <DependentUpon>frmCargarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClientes.resx">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInicio.resx">
+      <DependentUpon>frmInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInicioSesion.resx">
+      <DependentUpon>frmInicioSesion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include=".vs\ProjectSettings.json" />
+    <None Include=".vs\proyectoDelegado-HacerFuncionar.slnx\FileContentIndex\b59007af-9aca-45f1-b006-3b9c4a6707ac.vsidx" />
+    <None Include=".vs\proyectoDelegado-HacerFuncionar.slnx\v18\.wsuo" />
+    <None Include=".vs\proyectoDelegado-HacerFuncionar.slnx\v18\DocumentLayout.json" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include=".vs\VSWorkspaceState.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\Proveedores\baseProveedores.csv" />
+    <None Include="Resources\Proveedores\hola.csv" />
+    <None Include="Resources\Proveedores\hola2.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BaseDeDatos\EL_CLUB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\1-circle-fill.png" />
+    <Content Include="Resources\archivo-removebg-preview.png" />
+    <Content Include="Resources\archivo.png" />
+    <Content Include="Resources\bloquear.png" />
+    <Content Include="Resources\Blue.gif" />
+    <Content Include="Resources\candado %281%29.png" />
+    <Content Include="Resources\candado.png" />
+    <Content Include="Resources\cargando-unscreen.gif" />
+    <Content Include="Resources\cargando.gif" />
+    <Content Include="Resources\carpeta-removebg-preview.png" />
+    <Content Include="Resources\carpeta.png" />
+    <Content Include="Resources\cerrar-PhotoRoom.png-PhotoRoom.png" />
+    <Content Include="Resources\cerrar.png" />
+    <Content Include="Resources\cerrar2-removebg-preview.png" />
+    <Content Include="Resources\circle-1700_512.gif" />
+    <Content Include="Resources\EL_CLUB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\flecha-izquierda.png" />
+    <Content Include="Resources\flecha.png" />
+    <Content Include="Resources\fondo inicioBBVA.jpg" />
+    <Content Include="Resources\imgLogoSeguro-transformed.png" />
+    <Content Include="Resources\imgLogoSeguro.jpg" />
+    <Content Include="Resources\loading-26.gif" />
+    <Content Include="Resources\loading-49.gif" />
+    <Content Include="Resources\logo-bbva-fondo-2.jpg" />
+    <Content Include="Resources\logo-bbva-fondo-3alan.jpg" />
+    <Content Include="Resources\logobbvaBlanco.jpg" />
+    <Content Include="Resources\minimazar.png" />
+    <Content Include="Resources\minus-solid.png" />
+    <Content Include="Resources\numero-1 %281%29.png" />
+    <Content Include="Resources\numero-1.png" />
+    <Content Include="Resources\numero-2 %281%29.png" />
+    <Content Include="Resources\numero-2.png" />
+    <Content Include="Resources\titulo bbva.png" />
+    <Content Include="Resources\user-regular-removebg-preview.png" />
+    <Content Include="Resources\user-regular-_1_.jpg" />
+    <Content Include="Resources\user-regular.jpg" />
+    <Content Include="Resources\usuario %281%29.png" />
+    <Content Include="Resources\usuario %282%29.png" />
+    <Content Include="Resources\usuario %283%29.png" />
+    <Content Include="Resources\usuario.png" />
+    <Content Include="Resources\volver %281%29.png" />
+    <Content Include="Resources\volver.png" />
+    <Content Include="Resources\xmark-solid.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
