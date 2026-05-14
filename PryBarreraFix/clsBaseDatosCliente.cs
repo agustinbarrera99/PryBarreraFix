@@ -42,10 +42,7 @@ namespace pryFernandezIES
 
         public void TraerDatos(DataGridView grilla)
         {
-            //instancia un objeto en la memoria
             comandoBD = new OleDbCommand();
-
-            //conecta el comando con la conexion
             comandoBD.Connection = conexionBD;
             comandoBD.CommandType = System.Data.CommandType.TableDirect;
             comandoBD.CommandText = "CLIENTES";
@@ -110,38 +107,30 @@ namespace pryFernandezIES
 
             comandoBD = new OleDbCommand();
             comandoBD.Connection = conexionBD;
-            comandoBD.CommandType = System.Data.CommandType.TableDirect;
+            comandoBD.CommandType = CommandType.TableDirect;
             comandoBD.CommandText = "CLIENTES";
 
             adaptadorBD = new OleDbDataAdapter(comandoBD);
-            adaptadorBD.Fill(objDataSet,"CLIENTES");
 
-            DataTable dt = objDataSet.Tables["CLIENTES"];
+            // ✅ DataSet local
+            DataSet dsLocal = new DataSet();
+            adaptadorBD.Fill(dsLocal, "CLIENTES");
+
+            DataTable dt = dsLocal.Tables["CLIENTES"];
 
             foreach (DataRow dr in dt.Rows)
             {
-                
                 if ((int)dr["CODIGO_SOCIO"] == codigo)
                 {
-                    if ((bool)dr["ACTIVIDAD"] == false)
-                    {                       
-                        dr.BeginEdit();
-                        dr["ACTIVIDAD"] = true;
-                        dr.EndEdit();                     
-                        break;
-                    }
-                    else if ((bool)dr["ACTIVIDAD"] == true)
-                    {
-                        dr.BeginEdit();
-                        dr["ACTIVIDAD"] = false;
-                        dr.EndEdit();
-                        break;
-                    }
-                }                          
+                    dr.BeginEdit();
+                    dr["ACTIVIDAD"] = !((bool)dr["ACTIVIDAD"]); // ✅ Toggle simplificado
+                    dr.EndEdit();
+                    break;
+                }
             }
+
             OleDbCommandBuilder cb = new OleDbCommandBuilder(adaptadorBD);
-           
-            adaptadorBD.Update(objDataSet, "CLIENTES");                     
+            adaptadorBD.Update(dsLocal, "CLIENTES");
         }
     }
 }

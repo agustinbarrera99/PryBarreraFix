@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pryFernandezIES
@@ -13,69 +7,77 @@ namespace pryFernandezIES
     public partial class frmInicioSesion : Form
     {
         clsBaseDatosUsuarios objBaseDatosUsuario;
+
         public frmInicioSesion()
         {
             InitializeComponent();
-
             objBaseDatosUsuario = new clsBaseDatosUsuarios();
-            objBaseDatosUsuario.ConectarBD();
         }
-         
+
         private void btnInicioSesion_Click(object sender, EventArgs e)
         {
-            if (btnInicioSesion.Text == "Siguiente" )
-            {                              
-                //Situacion de error USUARIO  
+            if (btnInicioSesion.Text == "Siguiente →")
+            {
                 if (txtUsuario.Text == string.Empty)
-                {                  
-                    lblErrorUsuario.Visible = true;
-                    lblErrorUsuario.Text = "El Campo Usuario esta Vacio";
-                    pnlLineaUsuario.BackColor = Color.Red;                      
-                }
-                else
                 {
-                    timer1.Start();
-                    lblCopiaUsuario.Text = txtUsuario.Text;
-                    btnInicioSesion.Text = "Acceder";
-                    txtContraseña.Focus();
-                }               
+                    lblErrorUsuario.Visible = true;
+                    lblErrorUsuario.Text = "El campo Usuario está vacío";
+                    pnlLineaUsuario.BackColor = Color.FromArgb(255, 80, 80);
+                    return;
+                }
+
+                lblCopiaUsuario.Text = txtUsuario.Text;
+                btnInicioSesion.Text = "Acceder →";
+                controlTimer = false; 
+                timer1.Start();
             }
-            else if (btnInicioSesion.Text == "Acceder")
-            {              
-                objBaseDatosUsuario.Login(txtUsuario.Text, txtContraseña.Text, this);
-                
-                //Situacion de error CONTRASEÑA
+            else if (btnInicioSesion.Text == "Acceder →")
+            {
                 if (txtContraseña.Text == string.Empty)
                 {
                     lblErrorContraseña.Visible = true;
-                    lblErrorContraseña.Text = "El Campo Contraseña esta Vacio";
-                    pnlLineaContraseña.BackColor = Color.Red;                   
+                    lblErrorContraseña.Text = "El campo Contraseña está vacío";
+                    pnlLineaContraseña.BackColor = Color.FromArgb(255, 80, 80);
+                    return;
                 }
+
+                objBaseDatosUsuario.Login(txtUsuario.Text, txtContraseña.Text, this);
             }
         }
 
         public bool controlTimer = false;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(!controlTimer)
+            const int velocidad = 18;   
+            const int posInicio = 17;   
+            const int anchoPanel = 342;  
+
+            if (!controlTimer)
             {
-                pnlUsuario.Left -= 10;
-                pnlContraseña.Left -= 10;
-                if (pnlContraseña.Left <= 17)
+                pnlUsuario.Left -= velocidad;
+                pnlContraseña.Left -= velocidad;
+
+                if (pnlContraseña.Left <= posInicio)
                 {
+                    pnlUsuario.Left = posInicio - anchoPanel - 20;
+                    pnlContraseña.Left = posInicio;
                     timer1.Stop();
-                    controlTimer = true;
+                    txtContraseña.Focus();
                 }
             }
             else
             {
-                pnlUsuario.Left += 10;
-                pnlContraseña.Left += 10;
-                if (pnlUsuario.Left >= 17)
+                pnlUsuario.Left += velocidad;
+                pnlContraseña.Left += velocidad;
+
+                if (pnlUsuario.Left >= posInicio)
                 {
+                    pnlUsuario.Left = posInicio;
+                    pnlContraseña.Left = posInicio + anchoPanel + 20;
                     timer1.Stop();
                     txtUsuario.Focus();
-                    btnInicioSesion.Text = "Siguiente";
+                    btnInicioSesion.Text = "Siguiente →";
                     controlTimer = false;
                     txtContraseña.Text = string.Empty;
                     lblErrorContraseña.Visible = false;
@@ -84,92 +86,55 @@ namespace pryFernandezIES
         }
         private void pictureBox4_Click(object sender, EventArgs e)
         {
+            controlTimer = true;   // dirección: volver a usuario
             timer1.Start();
         }
-
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
-            pnlLineaUsuario.BackColor = Color.FromArgb(10, 60, 140);
+            pnlLineaUsuario.BackColor = Color.FromArgb(30, 144, 255);
             lblErrorUsuario.Visible = false;
-        }
-
-        private void txtContraseña_Enter(object sender, EventArgs e)
-        {
-            pnlLineaContraseña.BackColor = Color.FromArgb(10, 60, 140);
-            lblErrorContraseña.Visible = false;
         }
 
         private void txtUsuario_Leave(object sender, EventArgs e)
         {
-            pnlLineaUsuario.BackColor = Color.Black;
+            pnlLineaUsuario.BackColor = Color.FromArgb(60, 60, 90);
+        }
 
+        private void txtContraseña_Enter(object sender, EventArgs e)
+        {
+            pnlLineaContraseña.BackColor = Color.FromArgb(30, 144, 255);
+            lblErrorContraseña.Visible = false;
         }
 
         private void txtContraseña_Leave(object sender, EventArgs e)
         {
-            pnlLineaContraseña.BackColor = Color.Black;
+            pnlLineaContraseña.BackColor = Color.FromArgb(60, 60, 90);
         }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-
 
         private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (btnInicioSesion.Text == "Siguiente" && e.KeyChar == Convert.ToChar(Keys.Enter))
+            if (e.KeyChar == (char)Keys.Return)
             {
                 e.Handled = true;
-
-                //Situacion de error USUARIO  
-                if (txtUsuario.Text == string.Empty)
-                {
-                    lblErrorUsuario.Visible = true;
-                    lblErrorUsuario.Text = "El Campo Usuario esta Vacio";
-                    pnlLineaUsuario.BackColor = Color.Red;
-                }
-                else
-                {                  
-                    timer1.Start();
-                    lblCopiaUsuario.Text = txtUsuario.Text;
-                    btnInicioSesion.Text = "Acceder";
-                    txtContraseña.Focus();
-                }
+                btnInicioSesion_Click(sender, EventArgs.Empty);
             }
         }
 
         private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (btnInicioSesion.Text == "Acceder" && e.KeyChar == Convert.ToChar(Keys.Enter))
+            if (e.KeyChar == (char)Keys.Return)
             {
                 e.Handled = true;
-
-                objBaseDatosUsuario.Login(txtUsuario.Text, txtContraseña.Text, this);
-
-                //Situacion de error CONTRASEÑA
-                if (txtContraseña.Text == string.Empty)
-                {
-                    lblErrorContraseña.Visible = true;
-                    lblErrorContraseña.Text = "El Campo Contraseña esta Vacio";
-                    pnlLineaContraseña.BackColor = Color.Red;
-                }
+                btnInicioSesion_Click(sender, EventArgs.Empty);
             }
         }
 
+        private void btnCerrar_Click(object sender, EventArgs e) => Application.Exit();
+        private void btnMinimizar_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
+
         private void frmInicioSesion_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                e.Handled = true;
-                Application.Exit();
-            }
+            if (e.KeyCode == Keys.Escape) { e.Handled = true; Application.Exit(); }
         }
     }
 }

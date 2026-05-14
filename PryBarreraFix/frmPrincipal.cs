@@ -36,6 +36,9 @@ namespace pryFernandezIES
                 btnUsuarios.Visible = false;
                 btnUsuarios.Enabled = false;
             }
+
+            pctLogo.Paint += pctLogo_Paint;
+            ActualizarFlecha();
         }
 
         //  MENU
@@ -45,6 +48,44 @@ namespace pryFernandezIES
             {
                 formActivo.Close();
             }          
+        }
+
+        private void pctLogo_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            if (formActivo == null) return;
+
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Fondo semitransparente sobre el logo
+            using (var overlay = new SolidBrush(System.Drawing.Color.FromArgb(160, 18, 18, 30)))
+                g.FillRectangle(overlay, pctLogo.ClientRectangle);
+
+            // Flecha ←
+            var puntos = new System.Drawing.Point[]
+            {
+        new System.Drawing.Point(55, 50),   
+        new System.Drawing.Point(85, 30),   
+        new System.Drawing.Point(85, 42),   
+        new System.Drawing.Point(130, 42),  
+        new System.Drawing.Point(130, 58),  
+        new System.Drawing.Point(85, 58),  
+        new System.Drawing.Point(85, 70),  
+            };
+
+            using (var brush = new SolidBrush(System.Drawing.Color.FromArgb(30, 144, 255)))
+                g.FillPolygon(brush, puntos);
+            using (var font = new Font("Segoe UI", 8f, FontStyle.Bold))
+            using (var brush = new SolidBrush(System.Drawing.Color.FromArgb(180, 200, 255)))
+            {
+                var rect = new RectangleF(0, 72, pctLogo.Width, 20);
+                var fmt = new StringFormat { Alignment = StringAlignment.Center };
+                g.DrawString("Volver", font, brush, rect, fmt);
+            }
+        }
+        private void ActualizarFlecha()
+        {
+            pctLogo.Invalidate(); 
         }
 
         private void btnCargarProveedores_Click(object sender, EventArgs e)
@@ -92,7 +133,6 @@ namespace pryFernandezIES
             abrirFormHijo(new frmUsuarios());
         }
 
-        //  ABRIR FORMULARIO DENTRO DEL PRINCIPAL
         private Form formActivo = null;
 
         private void abrirFormHijo(Form formHijo)
@@ -109,7 +149,6 @@ namespace pryFernandezIES
             formHijo.Show();
         }
 
-        // HORA
         private void horaFecha_Tick(object sender, EventArgs e)
         {
             string hora = DateTime.Now.ToLongTimeString();
@@ -117,8 +156,6 @@ namespace pryFernandezIES
 
             lblFechaHora.Text = hora + "   " + fecha; 
         }
-
-        // CERRAR Y MINIMIZAR
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             DateTime fechaHora = DateTime.Now;

@@ -17,35 +17,30 @@ namespace pryFernandezIES
         {
             InitializeComponent();
             btnGuardar.Enabled = false;
-            DirectoryInfo rutaBase = new DirectoryInfo(@"../../Resources/Proveedores");
-            fbdSeleccionCarpeta.SelectedPath = Application.StartupPath + rutaBase;
+            string rutaProveedores = System.IO.Path.GetFullPath(
+                System.IO.Path.Combine(Application.StartupPath, @"..\..\Resources\Proveedores"));
+            fbdSeleccionCarpeta.SelectedPath = rutaProveedores;
         }
 
         private void btnSeleccionCarpeta_Click(object sender, EventArgs e)
         {
-            //SELECCIONO RUTA DE LA CARPETA
-            fbdSeleccionCarpeta.ShowDialog();
-            lblDireccion.Text = fbdSeleccionCarpeta.SelectedPath;
+            DialogResult resultado = fbdSeleccionCarpeta.ShowDialog();
 
-            if (btnSeleccionCarpeta.DialogResult == DialogResult.OK || btnSeleccionCarpeta.Enabled == true)
+            if (resultado == DialogResult.OK)
             {
+                lblDireccion.Text = fbdSeleccionCarpeta.SelectedPath;
                 btnGuardar.Enabled = true;
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //  CREO VARIABLE CON LA RUTA SELECCIONADA Y CREO VARIABLE NOMBRE DE ARCHIVO .CSV
             string ruta = fbdSeleccionCarpeta.SelectedPath;
             string nombreArchivo = txtNombreArchivo.Text + ".csv";
-
-            //  CONCATENO LA RUTA MAS UNA BARRA PARA ENTRAR A LA CARPETA SELECCIONADA Y EL NOMBRE DEL ARCHIVO
             ruta += @"\" + nombreArchivo;         
 
-            //  ABRO EL ARCHIVO 
             StreamWriter ManejoArchivo = new StreamWriter(ruta, false);
-           
-            //  LLAMO LOS CAMPOS ANTERIORMENTE CREADOS(se separan con ";")
+         
             ManejoArchivo.Write("N° ;");
             ManejoArchivo.Write("Entidad ;");
             ManejoArchivo.Write("APERTURA ;");
@@ -54,12 +49,8 @@ namespace pryFernandezIES
             ManejoArchivo.Write("JURISD. ;");
             ManejoArchivo.Write("DIRECCION ;");
             ManejoArchivo.WriteLine("LIQUIDADOR RESPONSABLE");
-
-            //  CIERRO EL ARCHIVO
             ManejoArchivo.Close();
             ManejoArchivo.Dispose();
-
-            // MENSAJE
             MessageBox.Show("Archivo Creado");
             lblDireccion.Text = "";
             txtNombreArchivo.Clear();

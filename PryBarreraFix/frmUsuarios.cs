@@ -45,15 +45,28 @@ namespace pryFernandezIES
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {           
-            objBaseDatosUsuarios.registrar(txtNombre.Text, txtContraseña.Text, Convert.ToString(lstCategoria.SelectedItem));
+        {
+            if (txtNombre.Text == string.Empty || txtContraseña.Text == string.Empty
+                || lstCategoria.SelectedItem == null)
+            {
+                MessageBox.Show("Completar todos los campos");
+                return;
+            }
+
+            objBaseDatosUsuarios.registrar(
+                txtNombre.Text,
+                txtContraseña.Text,
+                Convert.ToString(lstCategoria.SelectedItem));
+
             dgvUsuarios.Rows.Clear();
             dgvUsuarios.Columns.Clear();
             objBaseDatosUsuarios.TraerDatos(dgvUsuarios);
+
             txtNombre.Clear();
             txtContraseña.Clear();
-            lstCategoria.Items.Clear();
-            MessageBox.Show("Usuario Registrado con Exito");
+            lstCategoria.SelectedIndex = -1; // ✅ Resetea selección, NO borra los items
+
+            MessageBox.Show("Usuario Registrado con Éxito");
         }
     }
 }

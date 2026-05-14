@@ -18,13 +18,6 @@ namespace pryFernandezIES
         OleDbDataReader lectorBD;
         DataSet objDataSet = new DataSet();
 
-        public clsBaseDatosLogs()
-        {
-            // Constructor para inicializar la conexión y el comando.
-            conexionBD = new OleDbConnection();
-            comandoBD = new OleDbCommand();
-        }
-
         public string datosTabla;
         public void ConectarBD()
         {
@@ -40,26 +33,24 @@ namespace pryFernandezIES
         }
         public void TraerDatos(DataGridView grilla)
         {
-            //instancia un objeto en la memoria
             comandoBD = new OleDbCommand();
-
-            //conecta el comando con la conexion
             comandoBD.Connection = conexionBD;
-            comandoBD.CommandType = System.Data.CommandType.TableDirect;
+            comandoBD.CommandType = CommandType.TableDirect;
             comandoBD.CommandText = "LOGS";
 
             lectorBD = comandoBD.ExecuteReader();
+
             grilla.Columns.Add("Nombre", "Nombre");
             grilla.Columns.Add("Fecha", "Fecha");
             grilla.Columns.Add("Detalle", "Detalle");
 
-            //leo como si fuera un archivo
             if (lectorBD.HasRows)
             {
                 while (lectorBD.Read())
                 {
-                    datosTabla += "-" + lectorBD[1];
-                    grilla.Rows.Add(lectorBD[1], lectorBD[2], lectorBD[3]);
+                    // ✅ Acceso por nombre de columna, no por índice
+                    datosTabla += "-" + lectorBD["Nombre"];
+                    grilla.Rows.Add(lectorBD["Nombre"], lectorBD["Fecha"], lectorBD["Resultado"]);
                 }
             }
         }
@@ -70,23 +61,25 @@ namespace pryFernandezIES
 
             comandoBD = new OleDbCommand();
             comandoBD.Connection = conexionBD;
-            comandoBD.CommandType = System.Data.CommandType.TableDirect;           
+            comandoBD.CommandType = CommandType.TableDirect;
             comandoBD.CommandText = "LOGS";
-            
-            objDataAdap = new OleDbDataAdapter(comandoBD);           
-            objDataAdap.Fill(objDataSet, "LOGS");
-            
-            DataTable dt = objDataSet.Tables["LOGS"];         
+
+            objDataAdap = new OleDbDataAdapter(comandoBD);
+
+            DataSet dsLocal = new DataSet();
+            objDataAdap.Fill(dsLocal, "LOGS");
+
+            DataTable dt = dsLocal.Tables["LOGS"];
             DataRow dr = dt.NewRow();
-           
+
             dr["Nombre"] = usuario;
             dr["Fecha"] = fecha;
             dr["Resultado"] = accion;
-
             dt.Rows.Add(dr);
-            OleDbCommandBuilder cb = new OleDbCommandBuilder(objDataAdap);
 
-            objDataAdap.Update(objDataSet, "LOGS");
+            OleDbCommandBuilder cb = new OleDbCommandBuilder(objDataAdap);
+            objDataAdap.Update(dsLocal, "LOGS");
+
             conexionBD.Close();
             conexionBD.Dispose();
         }

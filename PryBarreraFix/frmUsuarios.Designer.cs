@@ -1,32 +1,18 @@
-﻿
-namespace pryFernandezIES
+﻿namespace pryFernandezIES
 {
     partial class frmUsuarios
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -41,50 +27,78 @@ namespace pryFernandezIES
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.lblTituloUsuarios = new System.Windows.Forms.Label();
+            this.lblTituloLogs = new System.Windows.Forms.Label();
+            this.pnlBarra = new System.Windows.Forms.Panel();
+
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.grbRegistro.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblEstadoConexion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 543);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(752, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblEstadoConexion
-            // 
-            this.lblEstadoConexion.Name = "lblEstadoConexion";
-            this.lblEstadoConexion.Size = new System.Drawing.Size(28, 17);
-            this.lblEstadoConexion.Text = "* * *";
-            // 
-            // dgvUsuarios
-            // 
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Location = new System.Drawing.Point(12, 12);
+
+            // ── Helper estilos DataGridView ────────────────
+            System.Action<System.Windows.Forms.DataGridView> estiloGrid = (dgv) =>
+            {
+                dgv.BackgroundColor = System.Drawing.Color.FromArgb(22, 22, 38);
+                dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                dgv.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(18, 18, 30);
+                dgv.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(30, 144, 255);
+                dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+                dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(18, 18, 30);
+                dgv.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(28, 28, 45);
+                dgv.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(200, 210, 240);
+                dgv.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(30, 144, 255);
+                dgv.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+                dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
+                dgv.EnableHeadersVisualStyles = false;
+                dgv.GridColor = System.Drawing.Color.FromArgb(40, 40, 65);
+                dgv.RowHeadersVisible = false;
+                dgv.RowTemplate.Height = 24;
+                dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+                dgv.ReadOnly = true;
+            };
+
+            // ── lblTituloUsuarios ─────────────────────────
+            this.lblTituloUsuarios.AutoSize = true;
+            this.lblTituloUsuarios.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTituloUsuarios.ForeColor = System.Drawing.Color.FromArgb(30, 144, 255);
+            this.lblTituloUsuarios.Location = new System.Drawing.Point(12, 14);
+            this.lblTituloUsuarios.Name = "lblTituloUsuarios";
+            this.lblTituloUsuarios.Text = "Usuarios registrados";
+
+            // ── lblTituloLogs ─────────────────────────────
+            this.lblTituloLogs.AutoSize = true;
+            this.lblTituloLogs.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTituloLogs.ForeColor = System.Drawing.Color.FromArgb(30, 144, 255);
+            this.lblTituloLogs.Location = new System.Drawing.Point(374, 14);
+            this.lblTituloLogs.Name = "lblTituloLogs";
+            this.lblTituloLogs.Text = "Historial de actividad (Logs)";
+
+            // ── pnlBarra ──────────────────────────────────
+            this.pnlBarra.BackColor = System.Drawing.Color.FromArgb(30, 144, 255);
+            this.pnlBarra.Location = new System.Drawing.Point(12, 38);
+            this.pnlBarra.Name = "pnlBarra";
+            this.pnlBarra.Size = new System.Drawing.Size(728, 2);
+
+            // ── dgvUsuarios ───────────────────────────────
+            estiloGrid(this.dgvUsuarios);
+            this.dgvUsuarios.Location = new System.Drawing.Point(12, 46);
             this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.ReadOnly = true;
-            this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(341, 270);
+            this.dgvUsuarios.Size = new System.Drawing.Size(348, 248);
             this.dgvUsuarios.TabIndex = 1;
-            // 
-            // dgvLogs
-            // 
-            this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLogs.Location = new System.Drawing.Point(378, 12);
+
+            // ── dgvLogs ───────────────────────────────────
+            estiloGrid(this.dgvLogs);
+            this.dgvLogs.Location = new System.Drawing.Point(374, 46);
             this.dgvLogs.Name = "dgvLogs";
-            this.dgvLogs.ReadOnly = true;
-            this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLogs.Size = new System.Drawing.Size(362, 469);
+            this.dgvLogs.Size = new System.Drawing.Size(366, 460);
             this.dgvLogs.TabIndex = 2;
-            // 
-            // grbRegistro
-            // 
+
+            // ── grbRegistro ───────────────────────────────
+            this.grbRegistro.BackColor = System.Drawing.Color.FromArgb(22, 22, 38);
+            this.grbRegistro.ForeColor = System.Drawing.Color.FromArgb(180, 200, 255);
+            this.grbRegistro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.grbRegistro.Controls.Add(this.button1);
             this.grbRegistro.Controls.Add(this.lstCategoria);
             this.grbRegistro.Controls.Add(this.lblCategoria);
@@ -92,90 +106,103 @@ namespace pryFernandezIES
             this.grbRegistro.Controls.Add(this.txtNombre);
             this.grbRegistro.Controls.Add(this.lblContraseña);
             this.grbRegistro.Controls.Add(this.lblNombre);
-            this.grbRegistro.Location = new System.Drawing.Point(42, 308);
+            this.grbRegistro.Location = new System.Drawing.Point(12, 310);
             this.grbRegistro.Name = "grbRegistro";
-            this.grbRegistro.Size = new System.Drawing.Size(273, 173);
+            this.grbRegistro.Size = new System.Drawing.Size(348, 196);
             this.grbRegistro.TabIndex = 3;
             this.grbRegistro.TabStop = false;
-            this.grbRegistro.Text = "Registro";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(97, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 29);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Registrar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // lstCategoria
-            // 
-            this.lstCategoria.FormattingEnabled = true;
-            this.lstCategoria.Items.AddRange(new object[] {
-            "Admin",
-            "User"});
-            this.lstCategoria.Location = new System.Drawing.Point(97, 82);
-            this.lstCategoria.Name = "lstCategoria";
-            this.lstCategoria.Size = new System.Drawing.Size(132, 21);
-            this.lstCategoria.TabIndex = 5;
-            // 
-            // lblCategoria
-            // 
-            this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(31, 85);
-            this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(52, 13);
-            this.lblCategoria.TabIndex = 4;
-            this.lblCategoria.Text = "Categoria";
-            // 
-            // txtContraseña
-            // 
-            this.txtContraseña.Location = new System.Drawing.Point(97, 56);
-            this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(132, 20);
-            this.txtContraseña.TabIndex = 3;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(97, 30);
+            this.grbRegistro.Text = "Nuevo Usuario";
+
+            // ── Labels del formulario de registro ─────────
+            System.Action<System.Windows.Forms.Label, string, int> estiloLbl = (lbl, txt, y) =>
+            {
+                lbl.AutoSize = true;
+                lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
+                lbl.ForeColor = System.Drawing.Color.FromArgb(180, 200, 255);
+                lbl.Location = new System.Drawing.Point(20, y);
+                lbl.Text = txt;
+            };
+            estiloLbl(this.lblNombre, "Nombre", 36);
+            estiloLbl(this.lblContraseña, "Contraseña", 70);
+            estiloLbl(this.lblCategoria, "Categoría", 104);
+
+            // ── TextBoxes del formulario ───────────────────
+            System.Action<System.Windows.Forms.TextBox, int> estiloTxt = (txt, y) =>
+            {
+                txt.BackColor = System.Drawing.Color.FromArgb(28, 28, 45);
+                txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                txt.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+                txt.ForeColor = System.Drawing.Color.White;
+                txt.Location = new System.Drawing.Point(110, y);
+                txt.Size = new System.Drawing.Size(210, 24);
+            };
+            estiloTxt(this.txtNombre, 32);
+            estiloTxt(this.txtContraseña, 66);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(132, 20);
+            this.txtContraseña.Name = "txtContraseña";
             this.txtNombre.TabIndex = 2;
-            // 
-            // lblContraseña
-            // 
-            this.lblContraseña.AutoSize = true;
-            this.lblContraseña.Location = new System.Drawing.Point(31, 59);
-            this.lblContraseña.Name = "lblContraseña";
-            this.lblContraseña.Size = new System.Drawing.Size(61, 13);
-            this.lblContraseña.TabIndex = 1;
-            this.lblContraseña.Text = "Contraseña";
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(31, 33);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(44, 13);
-            this.lblNombre.TabIndex = 0;
-            this.lblNombre.Text = "Nombre";
-            // 
-            // frmUsuarios
-            // 
+            this.txtContraseña.TabIndex = 3;
+
+            // ── lstCategoria ──────────────────────────────
+            this.lstCategoria.BackColor = System.Drawing.Color.FromArgb(28, 28, 45);
+            this.lstCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lstCategoria.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lstCategoria.ForeColor = System.Drawing.Color.White;
+            this.lstCategoria.FormattingEnabled = true;
+            this.lstCategoria.Items.AddRange(new object[] { "Admin", "User" });
+            this.lstCategoria.Location = new System.Drawing.Point(110, 100);
+            this.lstCategoria.Name = "lstCategoria";
+            this.lstCategoria.Size = new System.Drawing.Size(210, 24);
+            this.lstCategoria.TabIndex = 5;
+
+            // ── button1 (Registrar) ───────────────────────
+            this.button1.BackColor = System.Drawing.Color.FromArgb(30, 144, 255);
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(0, 110, 220);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(110, 144);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(210, 34);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Registrar Usuario";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+
+            // ── statusStrip1 ──────────────────────────────
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(14, 14, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.lblEstadoConexion });
+            this.statusStrip1.Location = new System.Drawing.Point(0, 543);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(752, 22);
+            this.statusStrip1.TabIndex = 0;
+
+            this.lblEstadoConexion.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblEstadoConexion.ForeColor = System.Drawing.Color.FromArgb(180, 200, 255);
+            this.lblEstadoConexion.Name = "lblEstadoConexion";
+            this.lblEstadoConexion.Text = "Conectando...";
+
+            // ── frmUsuarios ───────────────────────────────
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(22, 22, 38);
             this.ClientSize = new System.Drawing.Size(752, 565);
             this.Controls.Add(this.grbRegistro);
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.dgvUsuarios);
+            this.Controls.Add(this.pnlBarra);
+            this.Controls.Add(this.lblTituloLogs);
+            this.Controls.Add(this.lblTituloUsuarios);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.Name = "frmUsuarios";
-            this.Text = "frmUsuarios";
+            this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.frmUsuarios_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmUsuarios_KeyDown);
+
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
@@ -184,7 +211,6 @@ namespace pryFernandezIES
             this.grbRegistro.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -201,5 +227,8 @@ namespace pryFernandezIES
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblContraseña;
         private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label lblTituloUsuarios;
+        private System.Windows.Forms.Label lblTituloLogs;
+        private System.Windows.Forms.Panel pnlBarra;
     }
 }

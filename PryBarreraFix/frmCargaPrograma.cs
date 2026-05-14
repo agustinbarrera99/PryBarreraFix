@@ -25,8 +25,6 @@ namespace pryFernandezIES
         {
             carga();
         }
-
-        // METODO PARA CARGAR FORMULARIO SIGUIENTE
         public void carga()
         {
             pbrCarga.Increment(2);

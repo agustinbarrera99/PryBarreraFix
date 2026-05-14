@@ -12,31 +12,24 @@ namespace pryFernandezIES
             InitializeComponent();
 
             treDirectorios.Nodes.Clear();
-            //DirectoryInfo rutaBase = new DirectoryInfo(@"../../Resources/Proveedores/");            
+   
             treDirectorios.Nodes.Add(crearArbol(rutaBase));
         }
-
-        //CREA TREVIEW
         private void frmBuscarProveedor_Load(object sender, EventArgs e)
         {         
             pnlCargarProveedor.Visible = false;
           
         }
 
-        // CREO UNA METODO PARA CARGAR EL TREVIEW
         private TreeNode crearArbol(DirectoryInfo rutaBase)
         {
-            //  CREA UN NODO CON LA RUTABASE
             TreeNode newNode = new TreeNode(rutaBase.Name);
 
-            //RECORRE LOS DIRECTORIOS
             foreach (var dir in rutaBase.GetDirectories())
             {
-                //INICIA RECURSIVIDAD
                 newNode.Nodes.Add(crearArbol(dir));
             }
 
-            //RECORRE LOS ARCHIVOS
             foreach (var file in rutaBase.GetFiles())
             {
                 newNode.Nodes.Add(new TreeNode(file.Name));
@@ -44,8 +37,6 @@ namespace pryFernandezIES
 
             return newNode;
         }
-
-        //  CARGA DE GRILLA
         private void btnMostrarProveedor_Click(object sender, EventArgs e)
         {
             limpiar();
@@ -66,14 +57,10 @@ namespace pryFernandezIES
                     MessageBox.Show("Selecciona un archivo para cargar la grilla");
                     return;
                 }
-                //  CREO VARIABLES CON LA RUTA SELECCIONADA EN EL TREVIEW
                 string rutaArchivo = @"../../Resources/" + Convert.ToString(treDirectorios.SelectedNode.FullPath);
-                //string nombreArchivo = @"../../Resources/" + Convert.ToString(treDirectorios.SelectedNode.Name);
-
-                //  ABRO EL ARCHIVO PARA LEERLO
+   
                 StreamReader sr = new StreamReader(rutaArchivo, true);
 
-                //  LEE LINEA Y SEPARA SI DETECTA "; "
                 leerLinea = sr.ReadLine();
                 separarDatos = leerLinea.Split(';');
 
@@ -102,18 +89,13 @@ namespace pryFernandezIES
             }
         }
 
-        // AGREGAR
         private void btnNuevoProveedor_Click(object sender, EventArgs e)
         {
-            //  CONDICIONES
             if (txtNumero.Text == "" && txtEntidad.Text == "" && txtApertura.Text == "" && txtNumExpediente.Text == "" && txtJuzg.Text == "" && txtJurisd.Text == "" && txtDireccion.Text == "" && txtLiquidador.Text == "")
             {
                 MessageBox.Show("Llenar todos los campos");
                 return;
             }
-
-
-            //  CARGO EN ARCHIVO LOS NUEVOS DATOS EN CAMPOS DE TEXTO
 
             try
             {
@@ -144,7 +126,6 @@ namespace pryFernandezIES
 
         }
 
-        // MODIFICAR
         private void btnModificarProveedor_Click(object sender, EventArgs e)
         {
             string archivoSeleccionado = treDirectorios.SelectedNode.FullPath;
@@ -168,7 +149,6 @@ namespace pryFernandezIES
             GuardarCambiosEnCSV();
         }
 
-        // BORRAR
         private void btnEliminarProveedor_Click(object sender, EventArgs e)
         {
             string archivoSeleccionado = treDirectorios.SelectedNode.FullPath;
@@ -184,20 +164,17 @@ namespace pryFernandezIES
             GuardarCambiosEnCSV();
         }
 
-        // LIMPIA LOS TEXTBOX
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             limpiar();
         }
 
-        // ACTUALIZAR .CSV
         private void GuardarCambiosEnCSV()
         {
             string archivoSeleccionado = treDirectorios.SelectedNode.FullPath;
             
             StreamWriter swGuardar = new StreamWriter(archivoSeleccionado);
 
-            // ESCRIBIR LOS CAMPOS DE LAS COLUMNAS EN EL ARCHIVO
             for (int i = 0; i < dgrArchivos.Columns.Count; i++)
             {
                 swGuardar.Write(dgrArchivos.Columns[i].HeaderText);
@@ -207,14 +184,13 @@ namespace pryFernandezIES
                 }
                 else
                 {
-                    swGuardar.WriteLine(); // Agrega una línea en blanco al final de las cabeceras
+                    swGuardar.WriteLine();
                 }
             }
 
-            // ESCRIBIR LAS FILAS EN EL ARCHIVO
             foreach (DataGridViewRow row in dgrArchivos.Rows)
             {
-                if (!row.IsNewRow) // NO ESCRIBE LINEA EN BLANCO NUEVA
+                if (!row.IsNewRow)
                 {
                     for (int i = 0; i < dgrArchivos.Columns.Count; i++)
                     {
@@ -225,7 +201,7 @@ namespace pryFernandezIES
                         }
                         else
                         {
-                            swGuardar.WriteLine(); // AGREGA LINEA EN BLANCO DESPUES DE CADA FILA
+                            swGuardar.WriteLine(); 
                         }
                     }
                 }
